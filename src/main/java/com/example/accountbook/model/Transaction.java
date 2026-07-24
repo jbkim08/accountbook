@@ -22,6 +22,7 @@ public class Transaction {
     @NotBlank(message = "유형을 선택해 주세요")
     private String type;     // INCOME, EXPENSE
 
+    @NotBlank(message = "카테고리를 입력해주세요.")
     private String category;
     private LocalDateTime regDate;
 }
