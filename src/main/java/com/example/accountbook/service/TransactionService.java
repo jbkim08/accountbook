@@ -20,4 +20,16 @@ public class TransactionService {
     public void addTransaction(Transaction transaction) {
         transactionMapper.save(transaction);
     }
+    // id로 삭제하기
+    public void removeTransaction(Long id) {
+        transactionMapper.deleteById(id);
+    }
+    // 총 수익
+    public Long getTotalIncome() {
+        return transactionMapper.getTotalAmountByType("INCOME");
+    }
+    // 총 지출
+    public Long getTotalExpense() {
+        return transactionMapper.getTotalAmountByType("EXPENSE");
+    }
 }
