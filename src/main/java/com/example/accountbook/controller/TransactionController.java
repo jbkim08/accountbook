@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,8 +22,22 @@ public class TransactionController {
 
     // 가계부 메인 페이지 (목록 조회) - form 객체 바인딩 transaction 를 전달
     @GetMapping("/")
-    public String index(Model model, Transaction transaction) {
-        model.addAttribute("transactions", transactionService.getAllTransactions());
+    public String index(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(required = false) String startDate,
+            @RequestParam(required = false) String endDate,
+            @RequestParam(required = false) String category,
+            Model model, Transaction transaction) {
+        int pageSize = 10; //한페이지에 10개 표시
+        //검색조건이 포함된 목록과 전체 개수 조회
+        model.addAttribute("transactions", transactionService.getTransactions(page, pageSize, startDate, endDate, category));
+        int totalPages = transactionService.getTotalPages(pageSize, startDate, endDate, category);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalpages", totalPages);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        model.addAttribute("category", category);
+        // 합계 로직
         model.addAttribute("totalIncome", transactionService.getTotalIncome());
         model.addAttribute("totalExpense", transactionService.getTotalExpense());
         return "index";

@@ -32,4 +32,15 @@ public class TransactionService {
     public Long getTotalExpense() {
         return transactionMapper.getTotalAmountByType("EXPENSE");
     }
+    // 페이지번호, 10을 입력시 해당페이지의 10개 트랜젝션 가져옴
+    public List<Transaction> getTransactions(int page, int size,
+                                             String startDate, String endDate, String category) {
+        int offset = (page - 1) * size;
+        return transactionMapper.findPaged(offset, size, startDate, endDate, category);
+    }
+    // 한페이지 size 입력서 전체 페이지번호 리턴
+    public int getTotalPages(int size, String startDate, String endDate, String category) {
+        int totalCount = transactionMapper.countAll( startDate, endDate, category);
+        return (int) Math.ceil((double) totalCount / size);
+    }
 }
