@@ -33,7 +33,7 @@ public class TransactionController {
         model.addAttribute("transactions", transactionService.getTransactions(page, pageSize, startDate, endDate, category));
         int totalPages = transactionService.getTotalPages(pageSize, startDate, endDate, category);
         model.addAttribute("currentPage", page);
-        model.addAttribute("totalpages", totalPages);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("category", category);
