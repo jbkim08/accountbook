@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: accountbook
+  datasource:
+    url: jdbc:mysql://localhost:3306/board?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+  thymeleaf:
+    cache: false # 개발 중 화면 수정 반영을 위해 false 설정
+  sql:
+    init:
+      mode: always # 매번 실행 시 schema.sql / data.sql 자동 실행
+
+mybatis:
+  # XML 매퍼 파일의 위치 지정
+  mapper-locations: classpath:mapper/*.xml
+  # 결과 타입을 객체로 매핑할 때 패키지 경로 생략 가능하게 설정
+  type-aliases-package: com.example.accountbook.model
+  configuration:
+    map-underscore-to-camel-case: true # DB의 snake_case를 Java의 camelCase로 자동 매핑
+
+# 로그에서 SQL 쿼리 확인하고 싶을 때
+logging:
+  level:
+    com.example.accountbook.mapper: trace
