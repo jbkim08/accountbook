@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--자바의 인터페이스와 연동-->
+<mapper namespace="com.example.accountbook.mapper.MemberMapper">
+
+    <select id="findByUsername" resultType="Member">
+        SELECT * FROM members WHERE username = #{username}
+    </select>
+
+</mapper>
