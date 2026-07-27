@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +43,9 @@ public class TransactionService {
     public int getTotalPages(int size, String startDate, String endDate, String category, String username) {
         int totalCount = transactionMapper.countAll( startDate, endDate, category, username);
         return (int) Math.ceil((double) totalCount / size);
+    }
+    // 유저의 지출내역을 카테고리 별로 합계를 리스트로 가져옴
+    public List<Map<String, Object>> getCategoryStats(String username) {
+        return transactionMapper.getCategoryStats(username);
     }
 }

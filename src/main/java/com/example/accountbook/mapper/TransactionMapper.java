@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface TransactionMapper {
@@ -32,4 +33,6 @@ public interface TransactionMapper {
             @Param("category") String category,
             @Param("username") String username
     );
+
+    List<Map<String, Object>> getCategoryStats( String username);
 }

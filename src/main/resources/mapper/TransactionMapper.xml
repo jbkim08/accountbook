@@ -57,4 +57,11 @@
         </where>
     </select>
 
+    <select id="getCategoryStats" resultType="map">
+        SELECT category, SUM(amount) as total
+        FROM transactions
+        WHERE username = #{username} AND type = 'EXPENSE'
+        GROUP BY category
+    </select>
+
 </mapper>

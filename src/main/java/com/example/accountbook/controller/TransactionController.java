@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequiredArgsConstructor
 public class TransactionController {
@@ -65,5 +68,18 @@ public class TransactionController {
         transaction.setUsername(user.getUsername()); //유저네임을 추가한다.
         transactionService.addTransaction(transaction); //db에 저장됨
         return "redirect:/"; // 저장 후 메인 페이지로 리다이렉트
+    }
+
+    @GetMapping("/stats")
+    public String stats(@AuthenticationPrincipal User user, Model model) {
+        List<Map<String, Object>> stats = transactionService.getCategoryStats(user.getUsername());
+
+        // 차트에서 사용하기 위해 카테고리 이름 리스트와 합계 리스트로 분리
+        List<String> labels = stats.stream().map(s -> (String) s.get("category")).toList();
+        List<Double> data = stats.stream().map(s -> (Double) s.get("total")).toList();
+
+        model.addAttribute("labels", labels);
+        model.addAttribute("data", data);
+        return "stats"; // stats.html로 이동
     }
 }
