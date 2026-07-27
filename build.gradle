@@ -26,6 +26,8 @@ dependencies {
 	// MyBatis & MySQL
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	// 개발용 데브툴즈
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	// Lombok 2개 (코드 간소화)
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
