@@ -25,4 +25,5 @@ public class Transaction {
     @NotBlank(message = "카테고리를 입력해주세요.")
     private String category;
     private LocalDateTime regDate;
+    private String username;
 }

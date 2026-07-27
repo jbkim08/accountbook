@@ -9,25 +9,27 @@ import java.util.List;
 @Mapper
 public interface TransactionMapper {
     // 모든 내역 조회
-    List<Transaction> findAll();
+    List<Transaction> findAll(String username);
     // 내역 저장 (transaction.id 가 생성되어 저장)
     void save(Transaction transaction);
     // 삭제 메서드 추가
-    void deleteById(Long id);
+    void deleteById(Long id, @Param("username") String username);
     // 총 합계 계산 (유형별 수입, 지출)
-    Long getTotalAmountByType(String type);
+    Long getTotalAmountByType(String type, @Param("username") String username);
     // 파라미터로 시작 위치(offset)와 한 페이지당 개수(limit)를 전달
     List<Transaction> findPaged(
             @Param("offset") int offset,
             @Param("limit") int limit,
             @Param("startDate") String startDate,
             @Param("endDate") String endDate,
-            @Param("category") String category
+            @Param("category") String category,
+            @Param("username") String username
     );
     // 전체 데이터 개수 조회 (페이지 번호 계산용)
     int countAll(
             @Param("startDate") String startDate,
             @Param("endDate") String endDate,
-            @Param("category") String category
+            @Param("category") String category,
+            @Param("username") String username
     );
 }

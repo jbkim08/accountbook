@@ -5,29 +5,30 @@
 <mapper namespace="com.example.accountbook.mapper.TransactionMapper">
 
     <select id="findAll" resultType="Transaction">
-        SELECT * FROM transactions ORDER BY reg_date DESC
+        SELECT * FROM transactions WHERE username = #{username} ORDER BY reg_date DESC
     </select>
 
     <insert id="save" parameterType="Transaction" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO transactions (title, amount, type, category, reg_date)
-        VALUES (#{title}, #{amount}, #{type}, #{category}, NOW())
+        INSERT INTO transactions (title, amount, type, category, username, reg_date)
+        VALUES (#{title}, #{amount}, #{type}, #{category}, #{username}, NOW())
     </insert>
 
     <delete id="deleteById">
-        DELETE FROM transactions WHERE id = #{id}
+        DELETE FROM transactions WHERE id = #{id} AND username = #{username}
     </delete>
 
     <select id="getTotalAmountByType" resultType="long">
         SELECT COALESCE(SUM(amount), 0)
         FROM transactions
-        WHERE type = #{type}
+        WHERE type = #{type} AND username = #{username}
     </select>
 
     <select id="findPaged" resultType="Transaction">
         SELECT * FROM transactions
         <where>
+                username = #{username}
             <if test="startDate != null and startDate != ''">
-                reg_date >= #{startDate}
+                AND reg_date >= #{startDate}
             </if>
             <if test="endDate != null and endDate != ''">
                 AND reg_date &lt;= CONCAT(#{endDate}, ' 23:59:59')
@@ -43,8 +44,9 @@
     <select id="countAll" resultType="int">
         SELECT COUNT(*) FROM transactions
         <where>
+                username = #{username}
             <if test="startDate != null and startDate != ''">
-                reg_date >= #{startDate}
+                AND reg_date >= #{startDate}
             </if>
             <if test="endDate != null and endDate != ''">
                 AND reg_date &lt;= CONCAT(#{endDate}, ' 23:59:59')
