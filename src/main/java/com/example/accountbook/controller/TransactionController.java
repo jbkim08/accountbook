@@ -53,6 +53,7 @@ public class TransactionController {
     public String addTransaction(@Valid Transaction transaction,
                                  BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("currentPage", 1);
             model.addAttribute("transactions", transactionService.getAllTransactions());
             model.addAttribute("totalIncome", transactionService.getTotalIncome());
             model.addAttribute("totalExpense", transactionService.getTotalExpense());
