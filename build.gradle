@@ -26,6 +26,11 @@ dependencies {
 	// MyBatis & MySQL
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	// 시큐리티(인증 및 보안) & 타임리프 시큐리티(로그인 정보 사용)
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	// Apache POI (Excel 처리를 위한 라이브러리)
+	implementation 'org.apache.poi:poi-ooxml:5.2.3'
 	// 개발용 데브툴즈
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	// Lombok 2개 (코드 간소화)
@@ -33,6 +38,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
