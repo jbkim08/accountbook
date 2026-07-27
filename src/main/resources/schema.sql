@@ -13,5 +13,7 @@ CREATE TABLE transactions (
     amount LONG NOT NULL,           -- 금액
     type VARCHAR(10) NOT NULL,      -- INCOME(수입) 또는 EXPENSE(지출)
     category VARCHAR(50),           -- 카테고리 (식비, 교통비 등)
-    reg_date DATETIME DEFAULT CURRENT_TIMESTAMP -- 등록일
+    reg_date DATETIME DEFAULT CURRENT_TIMESTAMP, -- 등록일
+    username VARCHAR(50),
+    FOREIGN KEY (username) REFERENCES members(username) -- 외래키 참조
 );
