@@ -23,7 +23,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/js/**", "/signup").permitAll() // 정적 리소스 허용
+                        .requestMatchers("/css/**", "/js/**", "/login","/signup").permitAll() // 정적 리소스 허용
                         .anyRequest().authenticated() // 그 외 모든 요청은 로그인 필요
                 )
                 .formLogin(form -> form
