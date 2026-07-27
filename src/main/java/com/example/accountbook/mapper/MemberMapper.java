@@ -8,4 +8,7 @@ import org.apache.ibatis.annotations.Param;
 public interface MemberMapper {
     // 유저 찾기
     Member findByUsername(@Param("username") String username);
+    // 새 유저 추가
+    void insert(Member member);
+
 }
