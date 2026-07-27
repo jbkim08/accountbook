@@ -8,6 +8,12 @@
 <body class="container mt-5">
 <h2 class="mb-4">💰 나의 가계부</h2>
 
+<div class="mb-3 text-end">
+    <a th:href="@{/download/excel}" class="btn btn-success">
+        📊 엑셀로 내보내기
+    </a>
+</div>
+
 <div class="card mb-4">
     <div class="card-body">
         <form th:action="@{/add}" th:object="${transaction}" method="post" class="row g-3">
